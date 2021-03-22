@@ -21,6 +21,10 @@ node server.js
 yarn add ra-data-simple-rest
 ```
 
+```
+git clone https://github.com/NguyenVanKhoi2603/react-admin-post.git
+```
+
 - add link api
 ```
 // app.js
@@ -35,11 +39,11 @@ const App = () => (
 );
 ```
 
+- run 
 ```
-git clone https://github.com/NguyenVanKhoi2603/react-admin-post.git
-
 yarn start
 ```
+
 
 
 
