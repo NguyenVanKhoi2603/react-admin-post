@@ -1,6 +1,25 @@
-# Getting Started with Create React App
+# Create React-admin basic
+- Api myApi: https://github.com/NguyenVanKhoi2603/server-api-post.git
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. clone api and run
+
+```
+git clone https://github.com/NguyenVanKhoi2603/server-api-post.git
+
+cd src
+
+node server.js
+```
+
+--> server say: connect is 3001.
+
+2. clone react-admin and run
+```
+git clone https://github.com/NguyenVanKhoi2603/react-admin-post.git
+
+yarn start
+```
+
 
 ## Available Scripts
 
