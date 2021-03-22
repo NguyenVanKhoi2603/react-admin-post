@@ -1,5 +1,6 @@
 # Create React-admin basic
 - Api myApi: https://github.com/NguyenVanKhoi2603/server-api-post.git
+- follow tutorial: https://marmelab.com/react-admin/Tutorial.html
 
 1. clone api and run
 
@@ -14,11 +15,33 @@ node server.js
 --> server say: connect is 3001.
 
 2. clone react-admin and run
+
+- add package
+```
+yarn add ra-data-simple-rest
+```
+
+- add link api
+```
+// app.js
+
+const App = () => (
+  <Admin catchAll={NotFound} dashboard={Dashboard} dataProvider={simpleRestProvider('http://localhost:3001')}>
+    <Resource name="users" list={UserList} icon={UserIcon}></Resource>
+    <Resource name="posts" list={PostList} icon={PostIcon} edit={PostEdit} create={PostCreate}></Resource>
+    <Resource name="comments" list={CommentList} icon={CommentIcon}></Resource>
+    <Resource name="images" list={ImageList} icon={ImageIcon}></Resource>
+  </Admin>
+);
+```
+
 ```
 git clone https://github.com/NguyenVanKhoi2603/react-admin-post.git
 
 yarn start
 ```
+
+
 
 
 ## Available Scripts
