@@ -16,13 +16,13 @@ node server.js
 
 2. clone react-admin and run
 
+```
+git clone https://github.com/NguyenVanKhoi2603/react-admin-post.git
+```
+
 - add package
 ```
 yarn add ra-data-simple-rest
-```
-
-```
-git clone https://github.com/NguyenVanKhoi2603/react-admin-post.git
 ```
 
 - add link api
