@@ -1,5 +1,4 @@
 import { useGetPermissions } from "ra-core";
-import decodeJwt from 'jwt-decode';
 
 const authProvider = {
     login: ({ username, password }) => {
@@ -15,10 +14,16 @@ const authProvider = {
                 }
                 return response.json();
             })
-            .then(({ accessToken }) => {
-                const decodedToken = decodeJwt(accessToken);
-                localStorage.setItem('token', accessToken);
+            .then(auth => {
+                localStorage.setItem('auth', JSON.stringify(auth));
+            })
+            .then(({ token }) => {
+                const decodedToken = decodeJwt(token);
+                localStorage.setItem('token', token);
                 localStorage.setItem('permissions', decodedToken.permissions);
+            })
+            .catch(() => {
+                throw new Error('Network error')
             });
     },
     checkError: (error) => {
@@ -30,12 +35,12 @@ const authProvider = {
         // other error code (404, 500, etc): no need to log out
         return Promise.resolve();
     },
-    checkAuth: () => {
-        return localStorage.getItem('token') ? Promise.resolve() : Promise.reject();
-    },
+    checkAuth: () => localStorage.getItem('auth')
+        ? Promise.resolve()
+        : Promise.reject({ message: false }),
+
     logout: () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('permissions');
+        localStorage.removeItem('auth');
         return Promise.resolve();
     },
     getIdentity: () => {

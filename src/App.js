@@ -9,6 +9,7 @@ import { ImageList } from './components/images';
 import Dashboard from './components/Dashboard';
 import NotFound from './components/NotFound';
 import authProvider from './components/authProvider';
+import MyLoginPage from './components/MyLoginPage';
 import PostIcon from '@material-ui/icons/Book';
 import UserIcon from '@material-ui/icons/Group';
 import ImageIcon from '@material-ui/icons/Image';

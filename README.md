@@ -26,7 +26,7 @@ yarn add ra-data-simple-rest
 ```
 
 - add link api
-```
+````
 // app.js
 
 const App = () => (
@@ -37,7 +37,7 @@ const App = () => (
     <Resource name="images" list={ImageList} icon={ImageIcon}></Resource>
   </Admin>
 );
-```
+````
 
 - run 
 ```
