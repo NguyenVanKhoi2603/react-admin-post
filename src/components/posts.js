@@ -8,12 +8,15 @@ import {
     TextInput, SelectInput,
     ReferenceInput,
     Create,
-    Filter
+    Filter,
+    DateField,
+    ChipField,
 } from 'react-admin';
+
 
 const PostFilter = (props) => (
     <Filter {...props}>
-        <TextInput multiline label="Search" source="q" alwaysOn />
+        <TextInput multiline label="Search" source="content" alwaysOn />
         <ReferenceInput label="User" source="user_id" reference="users" allowEmpty>
             <SelectInput optionText="username" />
         </ReferenceInput>
@@ -26,9 +29,9 @@ export const PostList = props => (
             <TextField source="id" />
             <TextField source="title" />
             <TextField source="content" />
-            <TextField source="timestamp" />
+            <DateField showTime source="timestamp" />
             <ReferenceField source="user_id" reference="users">
-                <TextField source="username" />
+                <ChipField source="username" />
             </ReferenceField>
 
             <TextField source="image_id" />

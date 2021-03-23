@@ -1,4 +1,4 @@
-import { useGetPermissions } from "ra-core";
+//import { useGetPermissions } from "ra-core";
 import decodeJwt from 'jwt-decode';
 
 const authProvider = {

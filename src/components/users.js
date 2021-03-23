@@ -1,8 +1,14 @@
 import * as React from "react";
-import { List, Datagrid, TextField, SimpleForm, Create, TextInput, ReferenceInput, PasswordInput, Edit, EditButton } from 'react-admin';
+import { List, Datagrid, TextField, SimpleForm, Create, TextInput, PasswordInput, Edit, EditButton, Filter } from 'react-admin';
+
+const UserFilter = (props) => (
+    <Filter {...props}>
+        <TextInput multiline label="Search" source="q" alwaysOn />
+    </Filter>
+);
 
 export const UserList = props => (
-    <List {...props}>
+    <List filters={<UserFilter />} {...props}>
         <Datagrid rowClick="edit">
             <TextField source="id" />
             <TextField source="username" />
