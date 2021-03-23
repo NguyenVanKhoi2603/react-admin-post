@@ -1,9 +1,19 @@
 import * as React from "react";
-import { List, Datagrid, TextField, EditButton, ReferenceField, Edit, SimpleForm, TextInput, SelectInput, ReferenceInput, Create, Filter } from 'react-admin';
+import {
+    List, Datagrid,
+    TextField,
+    EditButton,
+    ReferenceField,
+    Edit, SimpleForm,
+    TextInput, SelectInput,
+    ReferenceInput,
+    Create,
+    Filter
+} from 'react-admin';
 
 const PostFilter = (props) => (
     <Filter {...props}>
-        <TextInput label="Search" source="q" alwaysOn />
+        <TextInput multiline label="Search" source="q" alwaysOn />
         <ReferenceInput label="User" source="user_id" reference="users" allowEmpty>
             <SelectInput optionText="username" />
         </ReferenceInput>
@@ -27,10 +37,10 @@ export const PostList = props => (
     </List>
 );
 const PostTitle = ({ record }) => {
-    return <span>Post {record ? `"${record.title}"` : ''}</span>;
+    return <span>Title: {record ? `"${record.title}"` : ''}</span>;
 };
 export const PostEdit = props => (
-    <Edit title={PostTitle} {...props}>
+    <Edit title={<PostTitle />}  {...props}>
         <SimpleForm>
             <TextInput disabled source="id" />
             <ReferenceInput source="user_id" reference="users">
@@ -38,6 +48,10 @@ export const PostEdit = props => (
             </ReferenceInput>
             <TextInput source="title" />
             <TextInput source="content" />
+            <ReferenceInput source="image_id" reference="images">
+                <SelectInput optionText="image" />
+            </ReferenceInput>
+            <TextInput disabled source="timestamp" />
         </SimpleForm>
     </Edit>
 );
@@ -48,8 +62,8 @@ export const PostCreate = props => (
             <ReferenceInput source="user_id" reference="users">
                 <SelectInput optionText="username" />
             </ReferenceInput>
-            <TextInput source="title" />
-            <TextInput multiline source="content" />
+            <TextInput id="outlined-basic" multiline source="title" />
+            <TextInput initialValue="Lorem Ipsum" source="content" />
             <ReferenceInput source="image" reference="images">
                 <SelectInput optionText="id" />
             </ReferenceInput>

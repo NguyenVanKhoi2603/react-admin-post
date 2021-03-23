@@ -6,5 +6,6 @@ export default () => (
     <Card>
         <Title title="Welcome to the administra tion" />
         <CardContent>Lorem ipsum sic dolor ametdddd...</CardContent>
+
     </Card>
 );

@@ -1,5 +1,11 @@
 import * as React from "react";
-import { List, Datagrid, TextField, EditButton, ReferenceField } from 'react-admin';
+import {
+    List,
+    Datagrid,
+    TextField,
+    EditButton,
+    ReferenceField
+} from 'react-admin';
 
 export const CommentList = props => (
     <List {...props}>
