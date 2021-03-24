@@ -5,7 +5,7 @@ import { Title } from 'react-admin';
 export default () => (
     <Card>
         <Title title="Welcome to the administrator" />
-        <Button variant="outlinedSecondary">sdsd</Button>
+        <Button>sdsd</Button>
         <CardContent>Lorem ipsum sic dolor ametdddd...</CardContent>
     </Card>
 );

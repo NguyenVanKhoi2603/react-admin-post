@@ -11,12 +11,14 @@ import {
     Filter,
     DateField,
     ChipField,
+    TabbedForm,
+    FormTab,
+    ReferenceManyField,
 } from 'react-admin';
-
 
 const PostFilter = (props) => (
     <Filter {...props}>
-        <TextInput multiline label="Search" source="content" alwaysOn />
+        <TextInput multiline label="Search" source="q" alwaysOn />
         <ReferenceInput label="User" source="user_id" reference="users" allowEmpty>
             <SelectInput optionText="username" />
         </ReferenceInput>
@@ -24,7 +26,7 @@ const PostFilter = (props) => (
 );
 
 export const PostList = props => (
-    <List filters={<PostFilter />} {...props}>
+    <List filters={<PostFilter />}  {...props}>
         <Datagrid>
             <TextField source="id" />
             <TextField source="title" />
@@ -33,7 +35,6 @@ export const PostList = props => (
             <ReferenceField source="user_id" reference="users">
                 <ChipField source="username" />
             </ReferenceField>
-
             <TextField source="image_id" />
             <EditButton></EditButton>
         </Datagrid>
@@ -42,20 +43,36 @@ export const PostList = props => (
 const PostTitle = ({ record }) => {
     return <span>Title: {record ? `"${record.title}"` : ''}</span>;
 };
+
 export const PostEdit = props => (
     <Edit title={<PostTitle />}  {...props}>
-        <SimpleForm>
-            <TextInput disabled source="id" />
-            <ReferenceInput source="user_id" reference="users">
-                <SelectInput optionText="username" />
-            </ReferenceInput>
-            <TextInput source="title" />
-            <TextInput source="content" />
-            <ReferenceInput source="image_id" reference="images">
-                <SelectInput optionText="image" />
-            </ReferenceInput>
-            <TextInput disabled source="timestamp" />
-        </SimpleForm>
+        <TabbedForm>
+            <FormTab label="Edit">
+                <ReferenceField label="User" source="user_id" reference="users">
+                    <TextField source="username" />
+                </ReferenceField>
+                <TextInput source="title" />
+                <TextInput source="content" />
+                <ReferenceInput source="image_id" reference="images">
+                    <SelectInput optionText="image" />
+                </ReferenceInput>
+                <TextInput disabled source="timestamp" />
+            </FormTab>
+            <FormTab label="Comment">
+                <ReferenceManyField reference="comments" target="post_id" addLabel={false}>
+                    <Datagrid>
+                        <TextField source="id" />
+                        <ReferenceField source="user_id" reference="users">
+                            <ChipField source="username" />
+                        </ReferenceField>
+                        <TextField source="post_id" />
+                        <TextField source="content" />
+                        <DateField source="timestamp" />
+                        <EditButton />
+                    </Datagrid>
+                </ReferenceManyField>
+            </FormTab>
+        </TabbedForm>
     </Edit>
 );
 
