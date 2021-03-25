@@ -1,4 +1,3 @@
-import { number } from "prop-types";
 import * as React from "react";
 import {
     List,
@@ -14,12 +13,13 @@ import {
     TabbedForm,
     FormTab,
     Pagination,
-    ReferenceField,
-    FunctionField,
     DateField,
     ReferenceManyField,
+    required,
+    minLength,
+    maxLength,
 } from 'react-admin';
-
+import { Card, CardMedia, Typography } from '@material-ui/core';
 const UserFilter = (props) => (
     <Filter {...props}>
         <TextInput multiline label="Search" source="q" alwaysOn />
@@ -28,27 +28,35 @@ const UserFilter = (props) => (
 
 const UserPagination = props => <Pagination rowsPerPageOptions={[2, 5, 7, 10]} {...props} />;
 
-export const UserList = props => {
-    let Number = 0;
-    console.log(props);
-    return (
-        <List filters={<UserFilter />} pagination={<UserPagination />} {...props}>
-            <Datagrid rowClick="edit">
-                <FunctionField label="STT" render={props => `${Number += 0.5}`} />
-                <TextField source="id" />
-                <TextField source="username" />
-                <TextField source="password" />
-                <EditButton></EditButton>
-            </Datagrid>
-        </List>
-    )
-};
+const Aside = () => (
+    <div style={{ width: 200, margin: '1em' }}>
+        <Typography variant="h6">Post details</Typography>
+        <Typography variant="body2">
+            Posts will only be published once an editor approves them
+        </Typography>
+    </div>
+);
+
+export const UserList = props => (
+    <List aside={<Aside />} filters={<UserFilter />} pagination={<UserPagination />} {...props}>
+        <Datagrid rowClick="edit">
+            <TextField source="id" />
+            <TextField source="username" />
+            <TextField source="password" />
+            <EditButton></EditButton>
+        </Datagrid>
+    </List>
+);
+
+const validateUsername = [required(), minLength(6), maxLength(15)];
+const validatePassword = [required(), minLength(6), maxLength(15)];
 
 export const UserCreate = props => (
     <Create {...props}>
-        <SimpleForm>
-            <TextInput source="username" />
-            <TextInput type={PasswordInput} source="password" />
+        <SimpleForm >
+            <TextInput source="username" resettable validate={validateUsername} />
+            <PasswordInput validate={validatePassword} source="password" />
+
         </SimpleForm>
     </Create>
 );

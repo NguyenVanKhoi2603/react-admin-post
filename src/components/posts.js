@@ -14,8 +14,17 @@ import {
     TabbedForm,
     FormTab,
     ReferenceManyField,
+    ImageField,
+    useListContext
 } from 'react-admin';
-
+import { Card, CardMedia } from '@material-ui/core';
+const cardStyle = {
+    width: 500,
+    minHeight: 400,
+    margin: '0.3em',
+    display: 'inline-block',
+    verticalAlign: 'top'
+};
 const PostFilter = (props) => (
     <Filter {...props}>
         <TextInput multiline label="Search" source="q" alwaysOn />
@@ -44,6 +53,22 @@ const PostTitle = ({ record }) => {
     return <span>Title: {record ? `"${record.title}"` : ''}</span>;
 };
 
+const ImageGrid = () => {
+    const { ids, data } = useListContext();
+    return (
+        <div style={{ margin: '0.3em' }}>
+            {ids.map(id =>
+
+                <Card key={id} style={cardStyle}>
+                    <CardMedia>
+                        <ImageField style={{ width: 400, height: 300 }} basePath="/image" record={data[id]} source="image"></ImageField>
+                    </CardMedia>
+                </Card>
+            )}
+        </div>
+    )
+}
+
 export const PostEdit = props => (
     <Edit title={<PostTitle />}  {...props}>
         <TabbedForm>
@@ -53,9 +78,6 @@ export const PostEdit = props => (
                 </ReferenceField>
                 <TextInput source="title" />
                 <TextInput source="content" />
-                <ReferenceInput source="image_id" reference="images">
-                    <SelectInput optionText="image" />
-                </ReferenceInput>
                 <TextInput disabled source="timestamp" />
             </FormTab>
             <FormTab label="Comment">
@@ -70,6 +92,11 @@ export const PostEdit = props => (
                         <DateField source="timestamp" />
                         <EditButton />
                     </Datagrid>
+                </ReferenceManyField>
+            </FormTab>
+            <FormTab label="Image">
+                <ReferenceManyField reference="images" target="image_id" addLabel={false}>
+                    <ImageGrid />
                 </ReferenceManyField>
             </FormTab>
         </TabbedForm>
