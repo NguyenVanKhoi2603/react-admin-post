@@ -4,8 +4,8 @@ import { Admin, Resource } from 'react-admin';
 import simpleRestProvider from 'ra-data-simple-rest';
 
 import { UserList, UserCreate, UserEdit } from './components/users';
-import { PostList, PostEdit, PostCreate } from './components/posts';
-import { CommentList } from './components/comments';
+import { PostList, PostEdit, PostCreate, PostShow } from './components/posts';
+import { CommentList, CommentEdit } from './components/comments';
 import { ImageList } from './components/images';
 import Dashboard from './components/Dashboard';
 import NotFound from './components/NotFound';
@@ -20,8 +20,8 @@ const dataProvider = simpleRestProvider('http://localhost:3001');
 const App = () => (
   <Admin catchAll={NotFound} authProvider={authProvider} dashboard={Dashboard} dataProvider={dataProvider}>
     <Resource name="users" list={UserList} icon={UserIcon} create={UserCreate} edit={UserEdit}></Resource>
-    <Resource name="posts" list={PostList} icon={PostIcon} edit={PostEdit} create={PostCreate}></Resource>
-    <Resource name="comments" list={CommentList} icon={CommentIcon}></Resource>
+    <Resource name="posts" show={PostShow} list={PostList} icon={PostIcon} edit={PostEdit} create={PostCreate}></Resource>
+    <Resource name="comments" list={CommentList} icon={CommentIcon} edit={CommentEdit}></Resource>
     <Resource name="images" list={ImageList} icon={ImageIcon}></Resource>
   </Admin>
 );

@@ -19,7 +19,7 @@ import {
     minLength,
     maxLength,
 } from 'react-admin';
-import { Card, CardMedia, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 const UserFilter = (props) => (
     <Filter {...props}>
         <TextInput multiline label="Search" source="q" alwaysOn />

@@ -5,7 +5,10 @@ import {
     EditButton,
     DateField,
     ReferenceField,
-    useListContext
+    useListContext,
+    Edit,
+    SimpleForm,
+    TextInput
 } from 'react-admin';
 import { Card, CardActions, CardContent, CardHeader, Avatar } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
@@ -16,6 +19,17 @@ const cardStyle = {
     display: 'inline-block',
     verticalAlign: 'top'
 };
+export const CommentEdit = props => (
+    <Edit {...props}>
+        <SimpleForm>
+            <TextInput source="id" />
+            <TextInput source="content" />
+            <TextInput source="timestamp" />
+        </SimpleForm>
+    </Edit>
+);
+
+
 const CommentGrid = () => {
     const { ids, data, basePath } = useListContext();
     let i = 0;

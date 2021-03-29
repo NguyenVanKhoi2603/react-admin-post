@@ -15,7 +15,10 @@ import {
     FormTab,
     ReferenceManyField,
     ImageField,
-    useListContext
+    useListContext,
+    Show, SimpleShowLayout,
+    ShowButton,
+    DateTimeInput
 } from 'react-admin';
 import { Card, CardMedia } from '@material-ui/core';
 const cardStyle = {
@@ -46,6 +49,7 @@ export const PostList = props => (
             </ReferenceField>
             <TextField source="image_id" />
             <EditButton></EditButton>
+            <ShowButton></ShowButton>
         </Datagrid>
     </List>
 );
@@ -103,6 +107,16 @@ export const PostEdit = props => (
     </Edit>
 );
 
+export const PostShow = (props) => (
+    <Show {...props}>
+        <SimpleShowLayout>
+            <TextField source="title" />
+            <TextField source="content" />
+            <DateField label="Publication date" source="timestamp" />
+        </SimpleShowLayout>
+    </Show>
+);
+
 export const PostCreate = props => (
     <Create {...props}>
         <SimpleForm>
@@ -114,7 +128,7 @@ export const PostCreate = props => (
             <ReferenceInput source="image" reference="images">
                 <SelectInput optionText="id" />
             </ReferenceInput>
-            <TextInput source="timestamp" />
+            <DateTimeInput source="timestamp"></DateTimeInput>
         </SimpleForm>
     </Create>
 );
